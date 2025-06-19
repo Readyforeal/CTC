@@ -21,7 +21,7 @@ new class extends Component {
             @if ($proposal->storage_url != '')
                 <div class="mt-2 flex items-center gap-1 ">
                     <flux:icon.cloud variant="mini" class="inline text-blue-500" />
-                    <flux:link variant="subtle" href="{{ $project->storage_url }}">OneDrive</flux:link>
+                    <flux:link variant="subtle" href="{{ $proposal->storage_url }}">OneDrive</flux:link>
                 </div>
             @endif
         </div>
