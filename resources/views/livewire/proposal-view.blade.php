@@ -9,21 +9,23 @@ new class extends Component {
 <section class="w-full">
     <div class="pb-6 border-b flex justify-between">
         <div>
-            <h1 class="text-3xl font-semibold">{{ $proposal->name }}</h1>
-            <div class="flex gap-2 items-center my-3">
+            <h1 class="text-3xl font-semibold flex items-center gap-2">
+                <flux:link variant="subtle" href="{{ $proposal->storage_url }}"><flux:icon.table-cells /></flux:link>
+                {{ $proposal->name }}
+            </h1>
+            <div class="flex gap-2 items-center mt-1">
                 <div>
-                    <p class="text-sm font-bold">{{ $project->name }}</p>
-                    <p class="text-sm">{{ $project->address }}</p>
+                    <flux:text class="text-sm flex items-center gap-2">
+                        <flux:link variant="subtle" href="{{ $proposal->project->storage_url }}"><flux:icon.folder /></flux:link>
+                        {{ $project->name }} - 
+                        {{ $project->address }}
+                </flux:text>
                 </div>
             </div>
-            <flux:text>{{ $proposal->scope }}</flux:text>
-
-            @if ($proposal->storage_url != '')
-                <div class="mt-2 flex items-center gap-1 ">
-                    <flux:icon.cloud variant="mini" class="inline text-blue-500" />
-                    <flux:link variant="subtle" href="{{ $proposal->storage_url }}">OneDrive</flux:link>
-                </div>
-            @endif
+            <flux:text class="mt-2 flex items-center gap-2">
+                <flux:icon.bars-3-bottom-left />
+                {{ $proposal->scope }}
+            </flux:text>
         </div>
 
         @livewire('edit-proposal-form', ['proposalId' => $proposal->id])
