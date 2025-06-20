@@ -33,17 +33,22 @@ new class extends Component {
             </div>
 
             @foreach ($accounts->where('category_id', $category->id) as $account)
-                <flux:callout>
+                <flux:callout class="{{ !$loop->first ? 'mt-2' : '' }}">
                     <flux:callout.heading>
                         <flux:modal.trigger name="view-account-{{ $account->id }} }}">
-                            <p class="hover:cursor-pointer">{{ $account->name }}</p>
+                            <p class="hover:cursor-pointer">
+                                {{ $account->name }}
+                                @if ($account->contacts->count() == 0)
+                                    <flux:badge size="sm" color="red" class="ml-2">Missing info</flux:badge>
+                                @endif
+                            </p>
                         </flux:modal.trigger>
 
                         <flux:modal name="view-account-{{ $account->id }} }}" class="w-3xl" variant="flyout">
                             <div class="space-y-6">
     
                                 <flux:heading class="flex gap-2">
-                                    @livewire('edit-account-form', ['accountId' => $account->id])
+                                    @livewire('edit-account-form', ['accountId' => $account->id], key('edit-account-' . $account->id))
                                     {{ $account->name }}
                                 </flux:heading>
     

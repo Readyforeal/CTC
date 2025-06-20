@@ -23,7 +23,7 @@ new class extends Component {
                 <h2 class="text-xl">Proposals</h2>
             </div>
 
-            <div class="mt-3">
+            <div class="mt-3 space-y-2">
                 @foreach (App\Models\Proposal::where('status', '!=', 'Completed')->get() as $proposal)
                     <flux:callout>
                         <flux:callout.heading class="justify-between">

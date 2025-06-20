@@ -35,7 +35,7 @@ new class extends Component {
             @livewire('create-proposal-form', ['projectId' => $project->id])
         </div>
 
-        <div class="mt-3">
+        <div class="mt-3 space-y-2">
             @foreach ($project->proposals as $proposal)
                 <flux:callout>
                     <flux:callout.heading class="justify-between">

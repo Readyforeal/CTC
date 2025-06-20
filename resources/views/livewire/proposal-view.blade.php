@@ -55,7 +55,7 @@ new class extends Component {
     
                 <tbody>
                     @foreach ($proposal->bidTrackers as $bidTracker)    
-                        <tr class="{{ !$loop->first ? 'border-t' : '' }} {{ $bidTracker->status == 'Received' ? 'bg-green-50' : '' }} text-sm">
+                        <tr class="{{ !$loop->first ? 'border-t' : '' }} {{ $bidTracker->status == 'Received' ? 'bg-green-500/10' : '' }} text-sm">
                             <td class="p-2">{{ $bidTracker->category->name }}</td>
                             <td class="p-2">{{ $bidTracker->account->name }}</td>
                             <td class="p-2 {{ ($editingFollowedUpDate && $editingId == $bidTracker->id) ? 'outline-2 outline-blue-300 rounded-lg' : '' }} relative" wire:click="editDueDate({{ $bidTracker->id }})">

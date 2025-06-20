@@ -1,6 +1,6 @@
 <div>
     <flux:modal.trigger name="create-project">
-        <flux:button variant="primary" size="sm" x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-project')">
+        <flux:button variant="primary" size="xs" x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-project')">
             {{ __('Create project') }}
         </flux:button>
     </flux:modal.trigger>
