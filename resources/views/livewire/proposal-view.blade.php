@@ -7,7 +7,7 @@ new class extends Component {
 }; ?>
 
 <section class="w-full">
-    <div class="pb-6 border-b flex justify-between">
+    <div class="p-3 border rounded-lg flex justify-between sticky top-3 backdrop-blur-sm bg-white/50 z-10">
         <div>
             <h1 class="text-3xl font-semibold flex items-center gap-2">
                 <flux:link variant="subtle" target="_blank" href="{{ $proposal->storage_url }}"><flux:icon.table-cells /></flux:link>
@@ -43,7 +43,7 @@ new class extends Component {
             </div>
         </div>
 
-        <div class="mt-3 border border-collapse rounded-lg">
+        <div class="relative mt-3 border border-collapse rounded-lg">
             <table class="table-fixed w-full">
                 <thead class="border-b">
                     <tr>
@@ -141,6 +141,15 @@ new class extends Component {
                             </td>
                         </tr>
                     @endforeach
+                    <tr class="text-sm sticky bottom-0 border-t">
+                        <td class="p-2"></td>
+                        <td class="p-2"></td>
+                        <td class="p-2"></td>
+                        <td class="p-2"></td>
+                        <td class="p-2">{{ round(($proposal->bidTrackers->where('status', '=', 'Received')->count() / $proposal->bidTrackers->count()) * 100) }}% received</td>
+                        <td class="p-2"></td>
+                        <td class="p-2">${{ $proposal->bidTrackers->flatMap->bids->sum('amount') }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
