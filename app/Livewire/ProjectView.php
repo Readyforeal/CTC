@@ -13,6 +13,7 @@ class ProjectView extends Component
     public $projectId;
 
     #[On('proposal-created')]
+    #[On('project-updated')]
     public function render()
     {
         return view('livewire.project-view', ['project' => ProjectModel::findOrFail($this->projectId)]);

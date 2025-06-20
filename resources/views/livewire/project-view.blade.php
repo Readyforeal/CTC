@@ -9,22 +9,21 @@ new class extends Component {
 <section class="w-full">
     <div class="pb-6 flex justify-between">
         <div>
-            <h1 class="text-3xl font-semibold">{{ $project->name }}</h1>
-            <p class="text-accent">{{ $project->address }}</p>
+            <h1 class="text-3xl font-semibold flex items-center gap-2">
+                @if($project->storage_url)
+                    <flux:link variant="subtle" target="_blank" href="{{ $project->storage_url }}"><flux:icon.folder /></flux:link>
+                @endif
+                {{ $project->name }}
+            </h1>
+            <flux:text class="text-accent">{{ $project->address }}</flux:text>
         
             <div class="mt-2">
                 <flux:badge color="{{ $project->status == 'Active' ? 'lime' : 'orange' }}">{{ $project->status }}</flux:badge>
                 <flux:badge color="blue">{{ $project->super }}</flux:badge>
             </div>
-        
-            @if ($project->storage_url != '')
-                <div class="mt-2">
-                    <flux:callout.link href="{{ $project->storage_url }}"><flux:icon.cloud class="inline" /> OneDrive</flux:callout.link>
-                </div>
-            @endif
         </div>
 
-        <flux:button icon="pencil-square" color="primary"></flux:button>
+        @livewire('edit-project-form', ['projectId' => $project->id])
     </div>
     
     <flux:separator />

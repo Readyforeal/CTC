@@ -10,15 +10,17 @@ new class extends Component {
     <div class="pb-6 border-b flex justify-between">
         <div>
             <h1 class="text-3xl font-semibold flex items-center gap-2">
-                <flux:link variant="subtle" href="{{ $proposal->storage_url }}"><flux:icon.table-cells /></flux:link>
+                <flux:link variant="subtle" target="_blank" href="{{ $proposal->storage_url }}"><flux:icon.table-cells /></flux:link>
                 {{ $proposal->name }}
             </h1>
             <div class="flex gap-2 items-center mt-1">
                 <div>
                     <flux:text class="text-sm flex items-center gap-2">
-                        <flux:link variant="subtle" href="{{ $proposal->project->storage_url }}"><flux:icon.folder /></flux:link>
-                        {{ $project->name }} - 
-                        {{ $project->address }}
+                        <flux:link variant="subtle" target="_blank" href="{{ $proposal->project->storage_url }}"><flux:icon.folder /></flux:link>
+                        <flux:link href="/project/{{ $project->id }}">
+                            {{ $project->name }} - 
+                            {{ $project->address }}
+                        </flux:link>
                 </flux:text>
                 </div>
             </div>
