@@ -33,7 +33,6 @@ new class extends Component {
                         <flux:callout.heading class="justify-between">
                             <flux:link class="ml-1" href="/project/{{ $proposal->project->id }}/proposal/{{ $proposal->id }}">{{ $proposal->name }}</flux:link>
                             <div>
-                                Due date {{ $proposal->due_date }}
                                 <flux:badge class="ml-2">{{ $proposal->status }}</flux:badge>
                             </div>
                         </flux:callout.heading>
