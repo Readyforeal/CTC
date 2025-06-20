@@ -26,6 +26,10 @@ new class extends Component {
             <div class="mt-3 space-y-2">
                 @foreach (App\Models\Proposal::where('status', '!=', 'Completed')->get() as $proposal)
                     <flux:callout>
+                        <div class="flex justify-between">
+                            <flux:text class="text-xs">{{ $proposal->project->name }}</flux:text>
+                            <flux:text class="text-xs">Due: {{ $proposal->due_date ? $proposal->due_date : 'No date assigned' }}</flux:text>
+                        </div>
                         <flux:callout.heading class="justify-between">
                             <flux:link class="ml-1" href="/project/{{ $proposal->project->id }}/proposal/{{ $proposal->id }}">{{ $proposal->name }}</flux:link>
                             <div>
