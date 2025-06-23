@@ -146,7 +146,12 @@ new class extends Component {
                         <td class="p-2"></td>
                         <td class="p-2"></td>
                         <td class="p-2"></td>
-                        <td class="p-2">{{ round(($proposal->bidTrackers->where('status', '=', 'Received')->count() / $proposal->bidTrackers->count()) * 100) }}% received</td>
+                        <td class="p-2">
+                            @if($proposal->bidTracker->count() > 0)
+                                {{ round(($proposal->bidTrackers->where('status', '=', 'Received')->count() / $proposal->bidTrackers->count()) * 100) }}
+                                % received
+                            @endif
+                        </td>
                         <td class="p-2"></td>
                         <td class="p-2">${{ $proposal->bidTrackers->flatMap->bids->sum('amount') }}</td>
                     </tr>
