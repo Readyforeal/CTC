@@ -147,7 +147,7 @@ new class extends Component {
                         <td class="p-2"></td>
                         <td class="p-2"></td>
                         <td class="p-2">
-                            @if($proposal->bidTracker->count() > 0)
+                            @if($proposal->bidTrackers->count() > 0)
                                 {{ round(($proposal->bidTrackers->where('status', '=', 'Received')->count() / $proposal->bidTrackers->count()) * 100) }}
                                 % received
                             @endif
