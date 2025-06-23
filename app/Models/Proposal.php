@@ -10,7 +10,7 @@ class Proposal extends Model
     /** @use HasFactory<\Database\Factories\ProposalFactory> */
     use HasFactory;
 
-    protected $fillable = ['project_id', 'name', 'scope', 'due_date', 'completed_date', 'storage_url'];
+    protected $fillable = ['project_id', 'name', 'scope', 'status', 'due_date', 'completed_date', 'storage_url'];
 
     public function project()
     {

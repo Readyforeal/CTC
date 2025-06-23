@@ -9,6 +9,7 @@ class EditProposalForm extends Component
 {
     public $proposalId;
 
+    public $status = '';
     public $name = '';
     public $scope = '';
     public $due_date;
@@ -18,6 +19,7 @@ class EditProposalForm extends Component
     {
         $proposal = Proposal::find($this->proposalId);
 
+        $this->status = $proposal->status;
         $this->name = $proposal->name;
         $this->scope = $proposal->scope;
         $this->due_date = $proposal->due_date;
@@ -31,6 +33,7 @@ class EditProposalForm extends Component
         $proposal = Proposal::find($this->proposalId);
 
         $proposal->update([
+            'status' => $this->status,
             'name' => $this->name,
             'scope' => $this->scope,
             'due_date' => $this->due_date,

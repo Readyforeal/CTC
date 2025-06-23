@@ -11,6 +11,16 @@
                 <flux:heading size="lg">{{ __('Edit proposal') }}</flux:heading>
             </div>
 
+            <flux:select wire:model="status" :label="__('Status')">
+                <flux:select.option value="">Select status...</flux:select.option>
+                <flux:select.option value="Not started">Not started</flux:select.option>
+                <flux:select.option value="In progress">In progress</flux:select.option>
+                <flux:select.option value="In review">In review</flux:select.option>
+                <flux:select.option value="Submitted">Submitted</flux:select.option>
+                <flux:select.option value="Accepted">Accepted</flux:select.option>
+                <flux:select.option value="Declined">Declined</flux:select.option>
+            </flux:select>
+
             <flux:input wire:model="name" :label="__('Name')" type="text" />
 
             <flux:input wire:model="scope" :label="__('Scope')" type="text" />
