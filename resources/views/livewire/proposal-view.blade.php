@@ -7,7 +7,7 @@ new class extends Component {
 }; ?>
 
 <section class="w-full">
-    <div class="p-3 border rounded-lg flex justify-between sticky top-3 backdrop-blur-sm bg-white/50 z-10">
+    <div class="p-3 border rounded-lg flex justify-between sticky top-3 backdrop-blur-lg bg-white/50 z-10">
         <div>
             <h1 class="text-3xl font-semibold flex items-center gap-2">
                 <flux:link variant="subtle" target="_blank" href="{{ $proposal->storage_url }}"><flux:icon.table-cells /></flux:link>
@@ -33,7 +33,7 @@ new class extends Component {
         @livewire('edit-proposal-form', ['proposalId' => $proposal->id])
     </div>
 
-    <div class="mt-6">
+    <div class="mt-6 p-3">
         <div class="flex justify-between">
             <h1 class="text-3xl font-semibold">Bid Trackers</h1>
 
@@ -136,24 +136,24 @@ new class extends Component {
                                     @livewire('bid-view', ['bidId' => $bid->id], key('bid-' . $bid->id))
                                 @endforeach
                             </td>
-                            <td class="p-2">
-                                ${{ $bidTracker->bids()->latest()->first()->amount ?? '0.00' }}
+                            <td class="p-2 text-right">
+                                {{ Illuminate\Support\Number::currency($bidTracker->bids()->latest()->first()->amount ?? '0.00') }}
                             </td>
                         </tr>
                     @endforeach
-                    <tr class="text-sm sticky bottom-0 border-t">
+                    <tr class="text-sm font-bold sticky bottom-3 border z-10 rounded-lg bg-white/50 backdrop-blur-sm">
                         <td class="p-2"></td>
                         <td class="p-2"></td>
                         <td class="p-2"></td>
                         <td class="p-2"></td>
                         <td class="p-2">
                             @if($proposal->bidTrackers->count() > 0)
-                                {{ round(($proposal->bidTrackers->where('status', '=', 'Received')->count() / $proposal->bidTrackers->count()) * 100) }}
+                                Total: {{ round(($proposal->bidTrackers->where('status', '=', 'Received')->count() / $proposal->bidTrackers->count()) * 100) }}
                                 % received
                             @endif
                         </td>
                         <td class="p-2"></td>
-                        <td class="p-2">${{ $proposal->bidTrackers->flatMap->bids->sum('amount') }}</td>
+                        <td class="p-2 text-right">Total: {{ Illuminate\Support\Number::currency($proposal->bidTrackers->flatMap->bids->sum('amount')) }}</td>
                     </tr>
                 </tbody>
             </table>
