@@ -7,7 +7,7 @@ new class extends Component {
 }; ?>
 
 <section class="w-full">
-    <div class="pb-6 flex justify-between">
+    <div class="p-3 border rounded-lg flex justify-between sticky top-3 backdrop-blur-lg bg-white/50 z-10">
         <div>
             <h1 class="text-3xl font-semibold flex items-center gap-2">
                 @if($project->storage_url)
@@ -26,9 +26,7 @@ new class extends Component {
         @livewire('edit-project-form', ['projectId' => $project->id])
     </div>
     
-    <flux:separator />
-
-    <div class="mt-6">
+    <div class="mt-3 px-3">
         <div class="flex justify-between">
             <h1 class="text-xl font-semibold">Proposals</h1>
             @livewire('create-proposal-form', ['projectId' => $project->id])

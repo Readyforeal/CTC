@@ -7,16 +7,14 @@ new class extends Component {
 }; ?>
 
 <section class="w-full">
-    <div class="pb-6 flex justify-between">
+    <div class="p-3 border rounded-lg flex justify-between sticky top-3 backdrop-blur-lg bg-white/50 z-10">
         <div class="flex items-center gap-2">
             <flux:icon.currency-dollar />
             <h1 class="text-3xl font-semibold">Estimating</h1>
         </div>
     </div>
 
-    <flux:separator/>
-
-    <div class="grid grid-cols-3 gap-4 mt-6">
+    <div class="grid grid-cols-3 gap-4 mt-6 px-3">
         <flux:callout>
             <flux:callout.heading>
                 Bid Tracking Summary
@@ -61,7 +59,7 @@ new class extends Component {
         </flux:callout>
     </div>
 
-    <div class="grid grid-cols-3 gap-4 mt-6">
+    <div class="grid grid-cols-3 gap-4 mt-3 px-3">
         <div>
             <div class="flex gap-2 items-center">
                 <flux:icon.document-currency-dollar />
