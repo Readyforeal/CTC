@@ -22,6 +22,8 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('/project/{projectId}', 'project-view')->name('project-view');
     Volt::route('/project/{projectId}/proposal/{proposalId}', 'proposal-view')->name('proposal-view');
 
+    Volt::route('/selections', 'selections')->name('selections');
+
     Volt::route('/accounts', 'accounts')->name('accounts');
 
     Volt::route('/categories', 'categories')->name('categories');

@@ -17,6 +17,51 @@ new class extends Component {
     <flux:separator/>
 
     <div class="grid grid-cols-3 gap-4 mt-6">
+        <flux:callout>
+            <flux:callout.heading>
+                Bid Tracking Summary
+            </flux:callout.heading>
+
+            <flux:callout.text>
+                {{ App\Models\BidTracker::where('status', '!=', 'Received')->get()->count() }} bids to be received
+                <br>
+                {{ App\Models\BidTracker::where('status', '=', 'In progress')->get()->count() }} bids in progress
+                <br>
+                {{ App\Models\BidTracker::where('status', '=', 'Not started')->get()->count() }} bids not started
+            </flux:callout.text>
+        </flux:callout>
+
+        <flux:callout>
+            <flux:callout.heading>
+                Updates Needed
+            </flux:callout.heading>
+
+            <flux:callout.text class="max-h-14 overflow-y-auto">
+                @forelse (App\Models\BidTracker::where('status', '=', 'Not started')->get() as $bidTracker)
+                    {{ $bidTracker->account->name }}
+                    <br>
+                @empty
+                    No updates needed
+                @endforelse
+            </flux:callout.text>
+        </flux:callout>
+
+        <flux:callout>
+            <flux:callout.heading>
+                Proposal Summary
+            </flux:callout.heading>
+
+            <flux:callout.text>
+                {{ App\Models\Proposal::where('status', '==', 'In progress')->get()->count() }} proposals in progress
+                <br>
+                {{ App\Models\Proposal::where('status', '==', 'In review')->get()->count() }} proposals in review
+                <br>
+                {{ App\Models\Proposal::where('status', '==', 'Accepted')->get()->count() }} proposals accepted
+            </flux:callout.text>
+        </flux:callout>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 mt-6">
         <div>
             <div class="flex gap-2 items-center">
                 <flux:icon.document-currency-dollar />

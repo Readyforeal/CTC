@@ -20,13 +20,21 @@ class CreateProjectForm extends Component
 
     public function store()
     {
-        Project::create([
+        $project = Project::create([
             'name' => $this->name,
             'address' => $this->address,
             'super' => $this->super,
             'status' => $this->status,
             'storage_url' => $this->storage_url
         ]);
+
+        $project->proposals()->create([
+            'name' => 'Cost Plus Range Proposal',
+            'scope' => '',
+            'due_date' => '',
+            'storage_url' => '',
+        ]);
+
         $this->dispatch('project-created');
         $this->modal('create-project')->close();
     }
