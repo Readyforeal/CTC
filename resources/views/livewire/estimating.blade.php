@@ -24,7 +24,7 @@ new class extends Component {
             </div>
 
             <div class="mt-3 space-y-2">
-                @foreach (App\Models\Proposal::where('status', '!=', 'Accepted')->get() as $proposal)   
+                @foreach (App\Models\Proposal::where('status', '!=', 'Accepted')->get()->sortBy('status') as $proposal)   
                     <flux:callout>
                         <div class="flex justify-between">
                             <flux:text class="text-xs">{{ $proposal->project->name }}</flux:text>
