@@ -52,11 +52,11 @@ new class extends Component {
             </flux:callout.heading>
 
             <flux:callout.text>
-                {{ App\Models\Proposal::where('status', '==', 'In progress')->get()->count() }} proposals in progress
+                {{ App\Models\Proposal::where('status', '=', 'In progress')->get()->count() }} proposals in progress
                 <br>
-                {{ App\Models\Proposal::where('status', '==', 'In review')->get()->count() }} proposals in review
+                {{ App\Models\Proposal::where('status', '=', 'In review')->get()->count() }} proposals in review
                 <br>
-                {{ App\Models\Proposal::where('status', '==', 'Accepted')->get()->count() }} proposals accepted
+                {{ App\Models\Proposal::where('status', '=', 'Accepted')->get()->count() }} proposals accepted
             </flux:callout.text>
         </flux:callout>
     </div>
