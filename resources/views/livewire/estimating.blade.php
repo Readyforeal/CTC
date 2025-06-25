@@ -24,7 +24,7 @@ new class extends Component {
             </div>
 
             <div class="mt-3 space-y-2">
-                @foreach (App\Models\Proposal::where('status', '!=', 'Completed')->get() as $proposal)
+                @foreach (App\Models\Proposal::where('status', '!=', 'Accepted')->get() as $proposal)   
                     <flux:callout>
                         <div class="flex justify-between">
                             <flux:text class="text-xs">{{ $proposal->project->name }}</flux:text>
@@ -51,26 +51,23 @@ new class extends Component {
                 @livewire('create-project-form')
             </div>
 
-            <div class="mt-3 grid grid-cols-2 gap-2">
+            <div class="mt-3 border rounded-lg bg-white">
                 @foreach ($projects as $project)
-                    <flux:callout>
-                        <flux:callout.heading>
-                            <flux:link href="/project/{{ $project->id }}">{{ $project->name }}</flux:link>
-                        </flux:heading>
+                    <div class="p-2 hover:bg-zinc-50 flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <flux:link target="_blank" href="{{ $project->storage_url }}">
+                                <flux:icon.folder />
+                            </flux:link>
+                            <flux:link href="/project/{{ $project->id }}">
+                                {{ $project->name }} - {{ $project->address }}
+                            </flux:link>
+                        </div>
 
-                        <flux:callout.text>
-                            {{ $project->address }}
-                            <flux:spacer></flux:spacer>
-                            <flux:badge class="mt-1" color="lime">{{ $project->status }}</flux:badge>
-                            <flux:badge class="mt-1" color="blue">{{ $project->super }}</flux:badge>
-                        </flux:callout.text>
-                        
-
-                        @if ($project->storage_url != '')
-                            <flux:callout.link href="{{ $project->storage_url }}"><flux:icon.cloud class="inline" /> OneDrive</flux:callout.link>
-                        @endif
-                        
-                    </flux:callout>
+                        <div class="flex items-center gap-2">
+                            <flux:badge color="blue">{{ $project->super }}</flux:badge>
+                            <flux:badge color="green">{{ $project->status }}</flux:badge>
+                        </div>
+                    </div>
                 @endforeach
             </div>
         </div>
