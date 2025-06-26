@@ -7,7 +7,7 @@ new class extends Component {
 }; ?>
 
 <section class="w-full">
-    <div class="p-3 border rounded-lg flex justify-between sticky top-3 backdrop-blur-lg bg-white/50 z-10">
+    <div class="p-3 border rounded-lg flex justify-between sticky top-3 backdrop-blur-xl bg-transparent z-10 inset-shadow-sm inset-shadow-white backdrop-brightness-105">
         <div>
             <h1 class="text-3xl font-semibold flex items-center gap-2">
                 <flux:link variant="subtle" target="_blank" href="{{ $proposal->storage_url }}"><flux:icon.table-cells /></flux:link>
@@ -33,7 +33,7 @@ new class extends Component {
         @livewire('edit-proposal-form', ['proposalId' => $proposal->id])
     </div>
 
-    <div class="mt-6 p-3">
+    <div class="p-3">
         <div class="flex justify-between">
             <h1 class="text-3xl font-semibold">Bid Trackers</h1>
 
