@@ -158,7 +158,7 @@ new class extends Component {
                                     <div class="flex items-center gap-1">
                                         @livewire('bid-view', ['bidId' => $bid->id], key('bid-' . $bid->id))
                                         @if($isLowest)
-                                            <span title="Lowest bid in category"><flux:icon.trophy /></span>
+                                            <span title="Lowest bid in category"><flux:icon.star variant="micro" class="text-amber-500" /></span>
                                         @endif
                                     </div>
                                 @endforeach
