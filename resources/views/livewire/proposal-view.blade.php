@@ -58,6 +58,14 @@ new class extends Component {
                 </thead>
     
                 <tbody>
+                    @php
+                        $lowestBidsByCategory = $proposal->bidTrackers
+                            ->groupBy('category_id')
+                            ->map(function ($trackers) {
+                                return $trackers->flatMap->bids->sortBy('amount')->first();
+                            })
+                            ->filter(); // removes nulls
+                    @endphp
                     @foreach ($proposal->bidTrackers as $bidTracker)    
                         <tr class="{{ !$loop->first ? 'border-t' : '' }} {{ $bidTracker->status == 'Received' ? 'bg-emerald-50' : '' }} text-sm">
                             <td class="p-2">
@@ -141,7 +149,18 @@ new class extends Component {
                             <td class="p-2 flex gap-2 items-center">
                                 @livewire('create-bid-form', ['bidTrackerId' => $bidTracker->id], key('create-bid-form-' . $bidTracker->id))
                                 @foreach($bidTracker->bids as $bid)
-                                    @livewire('bid-view', ['bidId' => $bid->id], key('bid-' . $bid->id))
+                                    @php
+                                        $categoryId = $bidTracker->category_id;
+                                        $lowestBid = $lowestBidsByCategory[$categoryId] ?? null;
+                                        $isLowest = $lowestBid && $bid->id === $lowestBid->id;
+                                    @endphp
+
+                                    <div class="flex items-center gap-1">
+                                        @livewire('bid-view', ['bidId' => $bid->id], key('bid-' . $bid->id))
+                                        @if($isLowest)
+                                            <span title="Lowest bid in category"><flux:icon.trophy /></span>
+                                        @endif
+                                    </div>
                                 @endforeach
                             </td>
                             <td class="p-2 text-right">
