@@ -75,7 +75,7 @@ new class extends Component {
                                     $index = $bidTracker->category->id % count($colors);
                                     $color = $colors[$index];
                                 @endphp
-                                <flux:badge color="{{ $color }}">{{ $bidTracker->category->name }}</flux:badge>
+                                <flux:badge inset="top bottom" color="{{ $color }}">{{ $bidTracker->category->name }}</flux:badge>
                             </td>
                             <td class="p-2">{{ $bidTracker->account->name }}</td>
                             <td class="p-2 {{ ($editingFollowedUpDate && $editingId == $bidTracker->id) ? 'outline-2 outline-blue-300 rounded-lg' : '' }} relative" wire:click="editDueDate({{ $bidTracker->id }})">
@@ -106,16 +106,16 @@ new class extends Component {
                                 
                                 @switch($bidTracker->status)
                                     @case('Not started')
-                                        <flux:badge color="zinc">{{ $bidTracker->status }}</flux:badge>
+                                        <flux:badge inset="top bottom" as="button" color="zinc">{{ $bidTracker->status }}</flux:badge>
                                         @break
                                     @case('In progress')
-                                        <flux:badge color="yellow">{{ $bidTracker->status }}</flux:badge>
+                                        <flux:badge inset="top bottom" as="button" color="yellow">{{ $bidTracker->status }}</flux:badge>
                                         @break
                                     @case('Received')
-                                        <flux:badge color="green">{{ $bidTracker->status }}</flux:badge>
+                                        <flux:badge inset="top bottom" as="button" color="green">{{ $bidTracker->status }}</flux:badge>
                                         @break
                                     @case('Declined')
-                                        <flux:badge color="red">{{ $bidTracker->status }}</flux:badge>
+                                        <flux:badge inset="top bottom" as="button" color="red">{{ $bidTracker->status }}</flux:badge>
                                         @break
                                     @default
                                         
@@ -124,10 +124,10 @@ new class extends Component {
                                 @if ($editingStatus and $editingId == $bidTracker->id)
                                     <div class="absolute bottom-full mb-2 left-0 right-0 z-10 border rounded-lg shadow-lg bg-zinc-50 p-1" wire:transition>
                                         <ul>
-                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('Not started')"><flux:badge color="zinc">Not started</flux:badge></li>
-                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('In progress')"><flux:badge color="yellow">In progress</flux:badge></li>
-                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('Received')"><flux:badge color="green">Received</flux:badge></li>
-                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('Declined')"><flux:badge color="red">Declined</flux:badge></li>
+                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('Not started')"><flux:badge as="button" color="zinc">Not started</flux:badge></li>
+                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('In progress')"><flux:badge as="button" color="yellow">In progress</flux:badge></li>
+                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('Received')"><flux:badge as="button" color="green">Received</flux:badge></li>
+                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('Declined')"><flux:badge as="button" color="red">Declined</flux:badge></li>
                                         </ul>
                                     </div>
                                 @endif

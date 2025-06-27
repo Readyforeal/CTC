@@ -5,7 +5,7 @@
         </flux:button>
     </flux:modal.trigger>
 
-    <flux:modal name="edit-proposal" :show="$errors->isNotEmpty()" focusable class="w-xl">
+    <flux:modal name="edit-proposal" :show="$errors->isNotEmpty()" focusable class="w-xl" backdrop="backdrop-blur-xl">
         <form wire:submit="update" class="space-y-6">
             <div>
                 <flux:heading size="lg">{{ __('Edit proposal') }}</flux:heading>
