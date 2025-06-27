@@ -59,7 +59,7 @@ new class extends Component {
     
                 <tbody>
                     @foreach ($proposal->bidTrackers as $bidTracker)    
-                        <tr class="{{ !$loop->first ? 'border-t' : '' }} {{ $bidTracker->status == 'Received' ? 'bg-green-500/10' : '' }} text-sm">
+                        <tr class="{{ !$loop->first ? 'border-t' : '' }} {{ $bidTracker->status == 'Received' ? 'bg-gradient-to-r from-white to-emerald-100' : '' }} text-sm">
                             <td class="p-2">
                                 @php
                                     $colors = ['red', 'blue', 'green', 'yellow', 'purple', 'pink', 'indigo', 'gray', 'teal', 'orange'];
