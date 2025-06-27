@@ -161,7 +161,17 @@ new class extends Component {
                             @endif
                         </td>
                         <td class="p-2"></td>
-                        <td class="p-2 text-right">Total: {{ Illuminate\Support\Number::currency($proposal->bidTrackers->flatMap->bids->sum('amount')) }}</td>
+                        @php
+                            $total = $proposal->bidTrackers
+                                ->groupBy('category_id')
+                                ->map(function ($trackers) {
+                                    // For each category group, collect all bids and find the lowest amount
+                                    return $trackers->flatMap->bids->min('amount');
+                                })
+                                ->filter() // Filter out nulls (in case a group has no bids)
+                                ->sum();
+                        @endphp
+                        <td class="p-2 text-right">Total: {{ Illuminate\Support\Number::currency($total) }}</td>
                     </tr>
                 </tbody>
             </table>
