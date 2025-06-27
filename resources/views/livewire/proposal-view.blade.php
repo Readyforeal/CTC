@@ -59,10 +59,10 @@ new class extends Component {
     
                 <tbody>
                     @foreach ($proposal->bidTrackers as $bidTracker)    
-                        <tr class="{{ !$loop->first ? 'border-t' : '' }} {{ $bidTracker->status == 'Received' ? 'bg-gradient-to-r from-white to-emerald-100' : '' }} text-sm">
+                        <tr class="{{ !$loop->first ? 'border-t' : '' }} {{ $bidTracker->status == 'Received' ? 'bg-emerald-50' : '' }} text-sm">
                             <td class="p-2">
                                 @php
-                                    $colors = ['red', 'blue', 'green', 'yellow', 'purple', 'pink', 'indigo', 'gray', 'teal', 'orange'];
+                                    $colors = ['red', 'blue', 'emerald', 'yellow', 'purple', 'pink', 'indigo', 'gray', 'teal', 'orange'];
 
                                     $index = $bidTracker->category->id % count($colors);
                                     $color = $colors[$index];
@@ -98,16 +98,16 @@ new class extends Component {
                                 
                                 @switch($bidTracker->status)
                                     @case('Not started')
-                                        <flux:badge variant="pill" color="zinc">{{ $bidTracker->status }}</flux:badge>
+                                        <flux:badge color="zinc">{{ $bidTracker->status }}</flux:badge>
                                         @break
                                     @case('In progress')
-                                        <flux:badge variant="pill" color="yellow">{{ $bidTracker->status }}</flux:badge>
+                                        <flux:badge color="yellow">{{ $bidTracker->status }}</flux:badge>
                                         @break
                                     @case('Received')
-                                        <flux:badge variant="pill" color="green">{{ $bidTracker->status }}</flux:badge>
+                                        <flux:badge color="emerald">{{ $bidTracker->status }}</flux:badge>
                                         @break
                                     @case('Declined')
-                                        <flux:badge variant="pill" color="red">{{ $bidTracker->status }}</flux:badge>
+                                        <flux:badge color="red">{{ $bidTracker->status }}</flux:badge>
                                         @break
                                     @default
                                         
@@ -116,10 +116,10 @@ new class extends Component {
                                 @if ($editingStatus and $editingId == $bidTracker->id)
                                     <div class="absolute bottom-full mb-2 left-0 right-0 z-10 border rounded-lg shadow-lg bg-zinc-50 p-1" wire:transition>
                                         <ul>
-                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('Not started')"><flux:badge variant="pill" color="zinc">Not started</flux:badge></li>
-                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('In progress')"><flux:badge variant="pill" color="yellow">In progress</flux:badge></li>
-                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('Received')"><flux:badge variant="pill" color="green">Received</flux:badge></li>
-                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('Declined')"><flux:badge variant="pill" color="red">Declined</flux:badge></li>
+                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('Not started')"><flux:badge color="zinc">Not started</flux:badge></li>
+                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('In progress')"><flux:badge color="yellow">In progress</flux:badge></li>
+                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('Received')"><flux:badge color="emerald">Received</flux:badge></li>
+                                            <li class="hover:bg-zinc-100 hover:cursor-pointer p-1 rounded-lg" @click.stop wire:click="saveStatus('Declined')"><flux:badge color="red">Declined</flux:badge></li>
                                         </ul>
                                     </div>
                                 @endif
@@ -128,13 +128,13 @@ new class extends Component {
                                 
                                 @switch($bidTracker->status)
                                     @case('In progress')
-                                        <flux:badge variant="pill" icon="clock" size="sm" color="yellow">{{ $bidTracker->status }}</flux:badge>
+                                        <flux:badge icon="clock" size="sm" color="yellow">{{ $bidTracker->status }}</flux:badge>
                                         @break
                                     @case('Received')
-                                        <flux:badge variant="pill" icon="check-circle" size="sm" color="green">{{ $bidTracker->status }}</flux:badge>
+                                        <flux:badge icon="check-circle" size="sm" color="emerald">{{ $bidTracker->status }}</flux:badge>
                                         @break
                                     @default
-                                        <flux:badge variant="pill" icon="minus-circle" size="sm" color="gray">{{ $bidTracker->status }}</flux:badge>
+                                        <flux:badge icon="minus-circle" size="sm" color="gray">{{ $bidTracker->status }}</flux:badge>
                                 @endswitch
                                 
                             </td> --}}
