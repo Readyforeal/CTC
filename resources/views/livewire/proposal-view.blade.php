@@ -7,7 +7,7 @@ new class extends Component {
 }; ?>
 
 <section class="w-full">
-    <div class="p-3 border rounded-xl flex justify-between sticky top-3 backdrop-blur-xl z-10 inset-shadow-sm inset-shadow-white bg-zinc-500/10">
+    <div class="p-3 border rounded-lg flex justify-between sticky top-3 backdrop-blur-xl bg-transparent z-10 inset-shadow-sm inset-shadow-white backdrop-brightness-105">
         <div>
             <h1 class="text-3xl font-semibold flex items-center gap-2">
                 <flux:link variant="subtle" target="_blank" href="{{ $proposal->storage_url }}"><flux:icon.table-cells /></flux:link>
@@ -168,29 +168,32 @@ new class extends Component {
                             </td>
                         </tr>
                     @endforeach
+                    <tr class="text-sm font-bold sticky bottom-3 border z-10 rounded-lg bg-white/50 backdrop-blur-sm">
+                        <td class="p-2"></td>
+                        <td class="p-2"></td>
+                        <td class="p-2"></td>
+                        <td class="p-2"></td>
+                        <td class="p-2">
+                            @if($proposal->bidTrackers->count() > 0)
+                                Total: {{ round(($proposal->bidTrackers->where('status', '=', 'Received')->count() / $proposal->bidTrackers->count()) * 100) }}
+                                % received
+                            @endif
+                        </td>
+                        <td class="p-2"></td>
+                        @php
+                            $total = $proposal->bidTrackers
+                                ->groupBy('category_id')
+                                ->map(function ($trackers) {
+                                    // For each category group, collect all bids and find the lowest amount
+                                    return $trackers->flatMap->bids->min('amount');
+                                })
+                                ->filter() // Filter out nulls (in case a group has no bids)
+                                ->sum();
+                        @endphp
+                        <td class="p-2 text-right">Total: {{ Illuminate\Support\Number::currency($total) }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="p-3 border rounded-xl flex justify-between sticky bottom-3 backdrop-blur-xl z-10 inset-shadow-sm inset-shadow-white bg-zinc-500/10">
-        <flux:text variant="strong" class="flex gap-2 items-center">
-            @php
-                $total = $proposal->bidTrackers
-                    ->groupBy('category_id')
-                    ->map(function ($trackers) {
-                        // For each category group, collect all bids and find the lowest amount
-                        return $trackers->flatMap->bids->min('amount');
-                    })
-                    ->filter() // Filter out nulls (in case a group has no bids)
-                    ->sum();
-            @endphp
-            <flux:icon.currency-dollar /> Total Low: {{ Illuminate\Support\Number::currency($total) }}
-        </flux:text>
-    
-        <flux:text variant="strong" class="flex gap-2 items-center">
-            @if($proposal->bidTrackers->count() > 0)
-                <flux:icon.chart-bar-square /> Received: {{ round(($proposal->bidTrackers->where('status', '=', 'Received')->count() / $proposal->bidTrackers->count()) * 100) }}%
-            @endif
-        </flux:text>
     </div>
 </section>
