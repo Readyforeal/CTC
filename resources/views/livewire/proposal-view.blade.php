@@ -7,7 +7,19 @@ new class extends Component {
 }; ?>
 
 <section class="w-full">
-    <div class="p-3 border rounded-xl flex justify-between sticky top-3 backdrop-blur-xl z-10 inset-shadow-sm inset-shadow-white bg-zinc-500/10">
+    <div
+        x-data="{ atTop: true }" 
+        x-init="() => { 
+            atTop = window.scrollY < 10;
+            window.addEventListener('scroll', () => {
+                atTop = window.scrollY < 10;
+            });
+        }"
+        :class="{
+            'bg-zinc-50 border-none': atTop,
+            'bg-zinc-100/80 backdrop-blur-xl border p-3': !atTop
+        }"
+        class="transition-all duration-250 ease-out rounded-xl flex justify-between sticky top-3 z-10">
         <div>
             <h1 class="text-3xl font-semibold flex items-center gap-2">
                 <flux:link variant="subtle" target="_blank" href="{{ $proposal->storage_url }}"><flux:icon.table-cells /></flux:link>
@@ -33,7 +45,7 @@ new class extends Component {
         @livewire('edit-proposal-form', ['proposalId' => $proposal->id])
     </div>
 
-    <div class="p-3">
+    <div class="mt-6">
         <div class="flex justify-between">
             <h1 class="text-3xl font-semibold">Bid Trackers</h1>
 
@@ -172,7 +184,7 @@ new class extends Component {
             </table>
         </div>
     </div>
-    <div class="p-3 border rounded-xl flex justify-between sticky bottom-3 backdrop-blur-xl z-10 inset-shadow-sm inset-shadow-white bg-zinc-500/10">
+    <div class="p-3 border rounded-xl flex justify-between sticky bottom-3 z-10 bg-zinc-100">
         <flux:text variant="strong" class="flex gap-2 items-center">
             @php
                 $total = $proposal->bidTrackers
