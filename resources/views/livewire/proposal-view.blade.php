@@ -78,7 +78,7 @@ new class extends Component {
                             })
                             ->filter(); // removes nulls
                     @endphp
-                    @foreach ($proposal->bidTrackers as $bidTracker)    
+                    @foreach ($proposal->bidTrackers->sortBy(fn($b) => $b->category->sort_order) as $bidTracker)    
                         <tr class="{{ !$loop->first ? 'border-t' : '' }} {{ $bidTracker->status == 'Received' ? 'bg-green-50' : '' }} text-sm">
                             <td class="p-2">
                                 @php
