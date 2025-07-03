@@ -12,6 +12,7 @@
             <div>
                 <flux:select wire:model.live="template" label="Template">
                     <flux:select.option value="">Select a template...</flux:select.option>
+                    <flux:select.option value="walkthrough">Walkthrough invitation</flux:select.option>
                     <flux:select.option value="initial_request">Initial bid request (All contacts)</flux:select.option>
                     <flux:select.option value="follow_up">Follow up on remaining bid requests (Remaining)</flux:select.option>
                     <flux:select.option value="update_all">Information update (All contacts)</flux:select.option>

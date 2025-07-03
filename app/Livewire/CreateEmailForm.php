@@ -28,6 +28,10 @@ class CreateEmailForm extends Component
         $bidTrackers = collect();
         if($this->template == 'initial_request') {
             $bidTrackers = $this->proposal->bidTrackers;
+        } else if($this->template == 'walkthrough') {
+            $bidTrackers = $this->proposal->bidTrackers->filter(function ($item) {
+                return str_contains($item->notes, 'Walk');
+            });
         } else if($this->template == 'follow_up') {
             $bidTrackers = $this->proposal->bidTrackers->where('status', '!=', 'Received');
         } else if($this->template == 'update_all'){
